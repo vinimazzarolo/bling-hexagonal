@@ -3,7 +3,7 @@ export default class Product {
         private id: String,
         private name: String,
         private price: Number,
-        private typee: String
+        private type: String
     ) {}
 
     public getId(): String {
@@ -19,6 +19,6 @@ export default class Product {
     }
 
     public getType(): String {
-        return this.typee;
+        return this.type;
     }
 }
