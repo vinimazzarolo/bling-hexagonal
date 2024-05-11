@@ -4,12 +4,16 @@ import { database } from "./DatabaseConnection";
 
 export default class ProductPGSQLRepository implements ProductRepository {
     async getAll(): Promise<Product[]> {
-        const products = await database.query('SELECT * FROM products', []);
+        const result = await database.query('SELECT * FROM products', []);
+        const products = result.map((row: any) => {
+            return new Product(row.id, row.name, row.price, row.type);
+        });
         return products;
     }
 
     async getById(id: String): Promise<Product> {
-        const product = await database.query('SELECT * FROM products WHERE id = $1', [id]);
+        const result = await database.query('SELECT * FROM products WHERE id = $1', [id]);
+        const product = new Product(result[0].id, result[0].name, Number(result[0].price), result[0].type);
         return product;
     }
 
