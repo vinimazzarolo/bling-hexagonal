@@ -15,7 +15,7 @@ export default class Product {
     }
 
     public getPrice(): Number {
-        return this.price;
+        return Number(this.price.toFixed(2));
     }
 
     public getType(): String {
