@@ -9,7 +9,7 @@ export default class ProductService {
         return await this.repository.getAll();
     }
 
-    async getById(id: String): Promise<Product> {
+    async getById(id: String): Promise<Product | null> {
         return await this.repository.getById(id);
     }
 

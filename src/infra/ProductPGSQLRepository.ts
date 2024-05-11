@@ -11,8 +11,11 @@ export default class ProductPGSQLRepository implements ProductRepository {
         return products;
     }
 
-    async getById(id: String): Promise<Product> {
+    async getById(id: String): Promise<Product | null> {
         const result = await database.query('SELECT * FROM products WHERE id = $1', [id]);
+        if (result.length === 0) {
+            return null;
+        }
         const product = new Product(result[0].id, result[0].name, Number(result[0].price), result[0].type);
         return product;
     }
